@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link href="https://fonts.googleapis.com/css?family=Lato|Raleway|" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="index.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Priyanka de Silva's Portfolio </title>
+
+</head>
+
+
+<body>
+
+<nav>
+	<a href="index.html"style="float:left;"><i class="fa fa-home fa-lg"></i></a>
+	<a href="contact.html">Contact Me</a>
+	<a href="assets/de_Silva_Priyanka_Resume.pdf" target="_blank;">Resume</a>
+	<a href="work.html">My Work</a>
+</nav>
+
+<section class="header" style="margin-top:70px; margin-bottom: 40px; height: 220px;">
+<h2 style="text-align:center;">Hi, I'm Priyanka '<span class="txt-rotate" data-period="2000" data-rotate="[ &quot;Pri&quot;, &quot;ප්‍රි&quot; ]"><span class="wrap">Pri</span></span>' de Silva.</h2>
+</section>
+
+<main style="background: rgba(255, 255, 255, 0.9); width: 85%; padding: 20px 70px; margin:30px 30px;">
+  
+  <content>
+    
+	<section>
+	<p>I'm from a small island nation in the Indian ocean called<span> <a href="page2.html">Sri Lanka</a></span>. I moved to America in 2016 to study at <span><a href="page2.html">SUNY Oswego</a></span>. I’m currently in graduate school studying <span><a href="page2.html">Human-Computer Interaction</a></span>. I did my undergraduate studies in <span> <a href="page2.html">Cognitive Science</a></span>. My passion lies in contributing towards the advancement of <span> <a href="page2.html"> Science & Technology</a></span>. To that end I hope to become a <span> <a href="page2.html"> UX Researcher/Academic</a></span>  in the near future. </p> 
+	</section>
+	
+  </content>
+  
+  <aside>
+    <img src="images/newdp.png" alt="profile-picture" style="width:400px;" "height:400px;">
+  </aside>
+  </main>
+
+<script>
+var TxtRotate = function(el, toRotate, period) {
+  this.toRotate = toRotate;
+  this.el = el;
+  this.loopNum = 0;
+  this.period = parseInt(period, 10) || 2000;
+  this.txt = '';
+  this.tick();
+  this.isDeleting = false;
+};
+
+TxtRotate.prototype.tick = function() {
+  var i = this.loopNum % this.toRotate.length;
+  var fullTxt = this.toRotate[i];
+
+  if (this.isDeleting) {
+    this.txt = fullTxt.substring(0, this.txt.length - 1);
+  } else {
+    this.txt = fullTxt.substring(0, this.txt.length + 1);
+  }
+
+  this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+  var that = this;
+  var delta = 300 - Math.random() * 100;
+
+  if (this.isDeleting) { delta /= 2; }
+
+  if (!this.isDeleting && this.txt === fullTxt) {
+    delta = this.period;
+    this.isDeleting = true;
+  } else if (this.isDeleting && this.txt === '') {
+    this.isDeleting = false;
+    this.loopNum++;
+    delta = 500;
+  }
+
+  setTimeout(function() {
+    that.tick();
+  }, delta);
+};
+
+window.onload = function() {
+  var elements = document.getElementsByClassName('txt-rotate');
+  for (var i=0; i<elements.length; i++) {
+    var toRotate = elements[i].getAttribute('data-rotate');
+    var period = elements[i].getAttribute('data-period');
+    if (toRotate) {
+      new TxtRotate(elements[i], JSON.parse(toRotate), period);
+    }
+  }
+  // INJECT CSS
+  var css = document.createElement("style");
+  css.type = "text/css";
+  css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+  document.body.appendChild(css);
+};
+</script>  
+</body>
+</html>
